@@ -88,12 +88,12 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
           篩選條件
         </button>
         <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="discountIndex.php?page=<?= $page ?>&type=1">id升冪</a></li>
-          <li><a class="dropdown-item" href="discountIndex.php?page=<?= $page ?>&type=2">id降冪</a></li>
-          <li><a class="dropdown-item" href="discountIndex.php?page=<?= $page ?>&type=3">折扣升冪</a></li>
-          <li><a class="dropdown-item" href="discountIndex.php?page=<?= $page ?>&type=4">折扣降冪</a></li>
-          <li><a class="dropdown-item" href="discountIndex.php?page=<?= $page ?>&type=5">有效日期升冪</a></li>
-          <li><a class="dropdown-item" href="discountIndex.php?page=<?= $page ?>&type=6">有效日期降冪</a></li>
+          <li><a class="dropdown-item" href="discountIndex.php?type=1">id升冪</a></li>
+          <li><a class="dropdown-item" href="discountIndex.php?type=2">id降冪</a></li>
+          <li><a class="dropdown-item" href="discountIndex.php?type=3">折扣升冪</a></li>
+          <li><a class="dropdown-item" href="discountIndex.php?type=4">折扣降冪</a></li>
+          <li><a class="dropdown-item" href="discountIndex.php?type=5">有效日期升冪</a></li>
+          <li><a class="dropdown-item" href="discountIndex.php?type=6">有效日期降冪</a></li>
         </ul>
       </div>
 

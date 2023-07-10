@@ -8,20 +8,42 @@ if (!isset($_GET["searchName"])) {
 
 $searchName = $_GET["searchName"] ?? "";
 
+$type = $_GET["type"] ?? 1;
+if ($type == 1) {
+  $where = "id ASC";
+}
+if ($type == 2) {
+  $where = "id DESC";
+}
+if ($type == 3) {
+  $where = "discount ASC";
+}
+if ($type == 4) {
+  $where = "discount DESC";
+}
+if ($type == 5) {
+  $where = "startDate ASC";
+}
+if ($type == 6) {
+  $where = "startDate DESC";
+}
+
 $page=$_GET["page"] ?? 1;
 $start = ($page - 1) * 10;
 
-$sql = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%'AND valid=1 ORDER BY id LIMIT $start,10";
-
-
+// 篩選節果
+$sql = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%' AND valid=1 ORDER BY $where LIMIT $start,10";
 $result = $conn->query($sql);
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 
-$numDiscount = $result->num_rows;
+//製作page
+$sqlforPage="SELECT * FROM ch WHERE discountName LIKE '%$searchName%'AND valid=1";
+$resultforPage = $conn->query($sqlforPage);
+$numDiscount = $resultforPage->num_rows;
 $totalPageCount = ceil($numDiscount / 10);
 
-var_dump($rows)."<br>";
-var_dump($numDiscount)."<br>";
+// var_dump($rows)."<br>";
+// var_dump($numDiscount)."<br>";
 ?>
 
 <!doctype html>
@@ -72,12 +94,12 @@ var_dump($numDiscount)."<br>";
                     篩選條件
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="dosearch.php?type=1">id升冪</a></li>
-                    <li><a class="dropdown-item" href="dosearch.php?type=2">id降冪</a></li>
-                    <li><a class="dropdown-item" href="dosearch.php?type=3">折扣升冪</a></li>
-                    <li><a class="dropdown-item" href="dosearch.php?type=4">折扣降冪</a></li>
-                    <li><a class="dropdown-item" href="dosearch.php?type=5">有效日期升冪</a></li>
-                    <li><a class="dropdown-item" href="dosearch.php?type=6">有效日期降冪</a></li>
+                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?=$searchName?>&type=1">id升冪</a></li>
+                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?=$searchName?>&type=2">id降冪</a></li>
+                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?=$searchName?>&type=3">折扣升冪</a></li>
+                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?=$searchName?>&type=4">折扣降冪</a></li>
+                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?=$searchName?>&type=5">有效日期升冪</a></li>
+                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?=$searchName?>&type=6">有效日期降冪</a></li>
                 </ul>
             </div>
 
@@ -144,16 +166,17 @@ var_dump($numDiscount)."<br>";
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+                    <a class="page-link <?php if($page-1==0){echo"disabled";} ?>" href="dosearch.php?searchName=coupon&page=<?=$page-1 ?>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
 
-                <li class="page-item"><a class="page-link" href="dosearch.php?searchName=<?=$searchName?>&page=1">1</a></li>
-                <li class="page-item"><a class="page-link" href="dosearch.php?searchName=<?=$searchName?>&page=2">2</a></li>
+                <?php for ($i = 1; $i <= $totalPageCount; $i++) : ?>
+                <li class="page-item"><a class="page-link <?php if($i==$page){echo "active" ;} ?>" href="dosearch.php?searchName=<?=$searchName?>&page=<?=$i?>&type=<?=$type?>"><?=$i ?></a></li>
+                <?php endfor  ?>
 
                 <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                    <a class="page-link <?php if($page==$totalPageCount){echo"disabled";} ?>" href="dosearch.php?searchName=coupon&page=<?=$page+1 ?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
