@@ -1,20 +1,27 @@
 <?php
 require_once("mydb-connect.php");
-if(!isset($_POST["searchName"])){
+if (!isset($_GET["searchName"])) {
     echo "請依正常管道進入頁面";
     die;
 }
 
-$searchName = $_POST["searchName"];
 
+$searchName = $_GET["searchName"] ?? "";
 
-$sql = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%'AND valid=1 ORDER BY id ";
+$page=$_GET["page"] ?? 1;
+$start = ($page - 1) * 10;
+
+$sql = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%'AND valid=1 ORDER BY id LIMIT $start,10";
 
 
 $result = $conn->query($sql);
-$numDiscount = $result->num_rows;
 $rows = $result->fetch_all(MYSQLI_ASSOC);
-// var_dump($rows);
+
+$numDiscount = $result->num_rows;
+$totalPageCount = ceil($numDiscount / 10);
+
+var_dump($rows)."<br>";
+var_dump($numDiscount)."<br>";
 ?>
 
 <!doctype html>
@@ -44,14 +51,14 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             <h2>優惠券目錄</h2>
         </div>
 
-        <form action="discountIndex.php" method="post">
+        <form action="dosearch.php">
             <div class="my-2 align-items-center row">
                 <div class="col-auto">
-                    <input type="text" class="form-control" name="searchName" placeholder="搜尋優惠券名稱">
+                    <input type="text" class="form-control" name="searchName" value="<?=$searchName?>">
                 </div>
-                <button class="btn btn-info col-auto me-2" type="submit">送出</button>
+                <button class="btn btn-info col-auto me-2" type="submit" >送出</button>
 
-                <?php if (!empty($_POST["searchName"])) : ?>
+                <?php if (!empty($_GET["searchName"])) : ?>
                     <a href="discountIndex.php" class="btn btn-info col-auto">返回列表</a>
                 <?php endif ?>
             </div>
@@ -134,6 +141,24 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             </table>
         </div>
 
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+
+                <li class="page-item"><a class="page-link" href="dosearch.php?searchName=<?=$searchName?>&page=1">1</a></li>
+                <li class="page-item"><a class="page-link" href="dosearch.php?searchName=<?=$searchName?>&page=2">2</a></li>
+
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
 
         <div>共 <?= $numDiscount ?> 筆</div>
 

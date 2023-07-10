@@ -71,16 +71,12 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
       <a href="./discountIndex.php" class="h2 text-decoration-none">優惠券目錄</a>
     </div>
 
-    <form action="dosearch.php" method="post">
+    <form action="dosearch.php">
       <div class="my-2 align-items-center row">
         <div class="col-auto">
           <input type="text" class="form-control" name="searchName" placeholder="搜尋優惠券名稱">
         </div>
         <button class="btn btn-info col-auto me-2" type="submit">送出</button>
-
-        <?php if (!empty($_POST["searchName"])) : ?>
-          <a href="discountIndex.php" class="btn btn-info col-auto">返回列表</a>
-        <?php endif ?>
       </div>
     </form>
 
