@@ -121,7 +121,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
               <td><?php if ($row["countType"] == 1) {
                     echo $row["discount"] . "元";
                   } else {
-                    echo $row["discount"] . "折";
+                    echo $row["discount"] . "%";
                   }
                   ?></td>
               <td><?= $row["discountCode"] ?></td>

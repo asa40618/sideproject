@@ -43,7 +43,7 @@ $row = $result->fetch_assoc();
             <td><?php if ($row["countType"] == 1) {
                   echo "元";
                 } else {
-                  echo "折";
+                  echo "%";
                 } ?></td>
           </tr>
           <tr>

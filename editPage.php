@@ -50,9 +50,9 @@ $row = $result->fetch_assoc();
                                 <select type="text" class="form-select" name="countType" id="CountType">
                                     <?php if ($row["countType"] == 1) : ?>
                                         <option value="1">元</option>
-                                        <option value="2">折</option>
+                                        <option value="2">%</option>
                                     <?php else : ?>
-                                        <option value="2">折</option>
+                                        <option value="2">%</option>
                                         <option value="1">元</option>
                                     <?php endif ?>
                                 </select>
