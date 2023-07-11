@@ -18,48 +18,117 @@
 
 <body>
   <div class="container">
-    <form action="doDiscountCreat.php" method="post">
-      <label for="discountName">優惠券名稱</label>
-      <input type="text" class="form-control" name="discountName">
 
-      <label for="countType">折扣種類</label>
-      <select type="text" class="form-select" name="countType" id="CountType">
-        <option value="1">固定折扣</option>
-        <option value="2">百分比折扣</option>
-      </select>
-      <label for="discount">折扣</label>
-      <input type="text" class="form-control" name="discount" placeholder="請輸入金額或折扣" id="">
-      <label for="discountCode">折扣代碼</label>
-      <input type="text" class="form-control" name="discountCode">
-      <div class="row my-3 align-items-center">
-        <label for="startDate" class="col-auto">起始日期:</label>
-        <div class="col-3">
-          <input type="date" class="form-control" name="startDate">
-        </div>
-        <label for="endDate" class="col-auto">結束日期:</label>
-        <div class="col-3">
-          <input type="date" class="form-control" name="endDate">
+    <label for="discountName">優惠券名稱</label>
+    <input type="text" class="form-control" name="discountName" id="discountName">
+
+    <label for="countType">折扣種類</label>
+    <select type="text" class="form-select" name="countType" id="countType">
+      <option value="1">固定折扣</option>
+      <option value="2">百分比折扣</option>
+    </select>
+    <label for="discount">折扣</label>
+    <input type="text" class="form-control" name="discount" placeholder="請輸入金額或折扣" id="discount">
+    <label for="discountCode">折扣代碼</label>
+    <input type="text" class="form-control" name="discountCode" id="discountCode">
+    <div class="row my-3 align-items-center">
+      <label for="startDate" class="col-auto">起始日期:</label>
+      <div class="col-3">
+        <input type="date" class="form-control" name="startDate" id="startDate">
+      </div>
+      <label for="endDate" class="col-auto">結束日期:</label>
+      <div class="col-3">
+        <input type="date" class="form-control" name="endDate" id="endDate">
+      </div>
+    </div>
+    <div class="d-flex align-items-center">
+      <button type="submit" class="btn btn-info" id="send">送出</button>
+      <div class="ms-2">
+        <a href="discountIndex.php" class="btn btn-info">返回列表</a>
+      </div>
+      <div class="ms-2"><span class="text-danger" id="warningText"></span></div>
+    </div>
+
+
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">即時訊息</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            優惠券新增成功
+          </div>
+          <div class="modal-footer">
+            <a href="discountIndex.php" type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回列表</a>
+            <a href="discountCreat.php" type="button" class="btn btn-primary">繼續新增</a>
+          </div>
         </div>
       </div>
-      <div class="d-flex">
-        <button type="submit" class="btn btn-info">送出</button>
-        <div class="ms-2">
-          <a href="discountIndex.php" class="btn btn-info">返回列表</a>
-        </div>
-      </div>
-    </form>
+    </div>
+
   </div>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
-  </script>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
   <script>
+    const discountName = document.querySelector("#discountName")
+    const countType = document.querySelector("#countType")
+    const discount = document.querySelector("#discount")
+    const discountCode = document.querySelector("#discountCode")
+    const startDate = document.querySelector("#startDate")
+    const endDate = document.querySelector("#endDate")
+
+    const warningText = document.querySelector("#warningText")
 
 
 
 
+    send.addEventListener("click", function() {
+
+      let discountNameValue = discountName.value
+      let countTypeValue = countType.value
+      let discountValue = discount.value
+      let discountCodeValue = discountCode.value
+      let startDateValue = startDate.value
+      let endDateValue = endDate.value
+
+      $.ajax({
+          method: "POST", //or GET
+          url: "discountAPI.php",
+          dataType: "json",
+          data: {
+            discountName: discountNameValue,
+            countType: countTypeValue,
+            discount: discountValue,
+            discountCode: discountCodeValue,
+            startDate: startDateValue,
+            endDate: endDateValue
+          }
+
+        })
+        .done(function(response) {
+          // console.log(response)
+          let status = response.status
+          if (status == 0) {
+            warningText.innerText = response.message
+          } else {
+            // console.log("success")
+            // $('#myModal').modal('show');
+            const modal = new bootstrap.Modal(document.getElementById('myModal'));
+            modal.show();
+
+          }
+        }).fail(function(jqXHR, textStatus) {
+
+
+        });
+    })
   </script>
 
 </body>
