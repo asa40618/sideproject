@@ -61,7 +61,7 @@
             優惠券新增成功
           </div>
           <div class="modal-footer">
-            <a href="discountIndex.php" type="button" class="btn btn-secondary" data-bs-dismiss="modal">返回列表</a>
+            <a href="discountIndex.php" type="button" class="btn btn-secondary">返回列表</a>
             <a href="discountCreat.php" type="button" class="btn btn-primary">繼續新增</a>
           </div>
         </div>
