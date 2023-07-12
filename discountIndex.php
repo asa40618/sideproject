@@ -34,6 +34,9 @@ if ($type == 6) {
   $where = "startDate DESC";
 }
 
+// 區分固定折扣、趴數折扣
+
+
 
 $sql = "SELECT * FROM ch WHERE valid=1 ORDER BY $where LIMIT $start,10 ";
 
@@ -78,11 +81,13 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
     </form>
 
     <div>
-      <a href="discountCreat.php" class="btn btn-primary mb-2"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
+      <div class=" mb-2 col-auto">
+        <a href="discountCreat.php" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
+      </div>
 
-      <div class="btn-group float-end">
+      <div class="btn-group float-end col-auto">
         <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
-          篩選條件
+          排序條件
         </button>
         <ul class="dropdown-menu">
           <li><a class="dropdown-item" href="discountIndex.php?type=1">id升冪</a></li>
@@ -124,17 +129,17 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
               <td><?= $row["discountCode"] ?></td>
               <td><?= $row["startDate"] ?> ~ <?= $row["endDate"] ?></td>
               <td><?= $row["created_at"] ?></td>
-              <td><a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary" >查看 <i class="fa-solid fa-right-to-bracket"></i> </a></td>
-              <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?=$row["id"] ?>">刪除 <i class="fa-solid fa-trash-can"></i> </button>
+              <td><a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a></td>
+              <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $row["id"] ?>">刪除 <i class="fa-solid fa-trash-can"></i> </button>
               </td>
             </tr>
-            
+
             <!-- 以下刪除提示 -->
-            <div class="modal fade" id="exampleModal<?=$row["id"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="exampleModal<?= $row["id"] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog">
                 <div class="modal-content">
                   <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel<?=$row["id"] ?>">確認刪除</h1>
+                    <h1 class="modal-title fs-5" id="exampleModalLabel<?= $row["id"] ?>">確認刪除</h1>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                   </div>
                   <div class="modal-body">
@@ -142,13 +147,13 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">否</button>
-                    <a href="doDelete.php?id=<?=$row["id"] ?>" type="button" class="btn btn-primary">是</a>
+                    <a href="doDelete.php?id=<?= $row["id"] ?>" type="button" class="btn btn-primary">是</a>
                   </div>
                 </div>
               </div>
             </div>
             <!-- 以上刪除提示 -->
-            <?php endforeach ?>
+          <?php endforeach ?>
 
         </tbody>
       </table>

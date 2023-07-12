@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>discountCreat</title>
+  <title>優惠券建立</title>
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,9 +10,8 @@
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-  <style>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  </style>
 
 </head>
 
@@ -42,9 +41,9 @@
       </div>
     </div>
     <div class="d-flex align-items-center">
-      <button type="submit" class="btn btn-info" id="send">送出</button>
+      <button type="submit" class="btn btn-primary" id="send"> <i class="fa-solid fa-plus"></i> 新增</button>
       <div class="ms-2">
-        <a href="discountIndex.php" class="btn btn-info">返回列表</a>
+        <a href="discountIndex.php" class="btn btn-primary"> <i class="fa-solid fa-reply"></i> 返回列表</a>
       </div>
       <div class="ms-2"><span class="text-danger" id="warningText"></span></div>
     </div>
@@ -100,7 +99,7 @@
 
       $.ajax({
           method: "POST", //or GET
-          url: "discountCreatAPI.php",
+          url: "API/discountCreatAPI.php",
           dataType: "json",
           data: {
             discountName: discountNameValue,

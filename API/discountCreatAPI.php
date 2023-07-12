@@ -1,5 +1,5 @@
 <?php
-require_once("./mydb-connect.php");
+require_once("../mydb-connect.php");
 
 if(!isset($_POST["discountName"])){
     // echo"請依正常管道進入此頁";

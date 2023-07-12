@@ -77,7 +77,9 @@ $totalPageCount = ceil($numDiscount / 10);
         <form action="dosearch.php">
             <div class="my-2 align-items-center row">
                 <div class="col-auto">
-                    <input type="text" class="form-control" name="searchName" placeholder="<?php if(empty($searchName)){echo "搜尋優惠券名稱"; } ?>" value="<?= $searchName ?>">
+                    <input type="text" class="form-control" name="searchName" placeholder="<?php if (empty($searchName)) {
+                                                                                                echo "搜尋優惠券名稱";
+                                                                                            } ?>" value="<?= $searchName ?>">
                 </div>
                 <button class="btn btn-primary col-auto me-2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 
@@ -89,6 +91,8 @@ $totalPageCount = ceil($numDiscount / 10);
 
         <div>
             <a href="discountCreat.php" class="btn btn-primary mb-2"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
+
+            
 
             <div class="btn-group float-end">
                 <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
