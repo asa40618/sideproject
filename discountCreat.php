@@ -100,7 +100,7 @@
 
       $.ajax({
           method: "POST", //or GET
-          url: "discountAPI.php",
+          url: "discountCreatAPI.php",
           dataType: "json",
           data: {
             discountName: discountNameValue,
