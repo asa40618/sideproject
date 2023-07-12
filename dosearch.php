@@ -58,6 +58,7 @@ $totalPageCount = ceil($numDiscount / 10);
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
 
@@ -76,18 +77,18 @@ $totalPageCount = ceil($numDiscount / 10);
         <form action="dosearch.php">
             <div class="my-2 align-items-center row">
                 <div class="col-auto">
-                    <input type="text" class="form-control" name="searchName" value="<?= $searchName ?>">
+                    <input type="text" class="form-control" name="searchName" placeholder="<?php if(empty($searchName)){echo "搜尋優惠券名稱"; } ?>" value="<?= $searchName ?>">
                 </div>
-                <button class="btn btn-info col-auto me-2" type="submit">送出</button>
+                <button class="btn btn-primary col-auto me-2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 
                 <?php if (!empty($_GET["searchName"])) : ?>
-                    <a href="discountIndex.php" class="btn btn-info col-auto">返回列表</a>
+                    <a href="discountIndex.php" class="btn btn-primary col-auto"><i class="fa-solid fa-reply"></i> 返回列表</a>
                 <?php endif ?>
             </div>
         </form>
 
         <div>
-            <a href="discountCreat.php" class="btn btn-info mb-2">新增</a>
+            <a href="discountCreat.php" class="btn btn-primary mb-2"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
 
             <div class="btn-group float-end">
                 <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
@@ -133,8 +134,8 @@ $totalPageCount = ceil($numDiscount / 10);
                             <td><?= $row["discountCode"] ?></td>
                             <td><?= $row["startDate"] ?> ~ <?= $row["endDate"] ?></td>
                             <td><?= $row["created_at"] ?></td>
-                            <td><a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看</a></td>
-                            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">刪除</button>
+                            <td><a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a></td>
+                            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">刪除 <i class="fa-solid fa-trash-can"></i> </button>
                             </td>
                         </tr>
 
