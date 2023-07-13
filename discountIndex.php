@@ -146,7 +146,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             <th class="text-center">折扣內容</th>
             <th class="text-center">折扣代碼</th>
             <th class="text-center">有效期限</th>
-            <th class="text-center">建立時間</th>
+            <th class="text-center">最後更新時間</th>
             <th></th>
           </tr>
         </thead>

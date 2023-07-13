@@ -1,7 +1,7 @@
 <?php
 require_once("mydb-connect.php");
 if (!isset($_GET["searchName"])) {
-    echo "請依正常管道進入頁面";
+    header("location:404page.php");
     die;
 }
 
@@ -150,7 +150,7 @@ $totalPageCount = ceil($numDiscount / 10);
                         <th class="text-center">折扣內容</th>
                         <th class="text-center">折扣代碼</th>
                         <th class="text-center">有效期限</th>
-                        <th class="text-center">建立時間</th>
+                        <th class="text-center">最後更新時間</th>
                         <th></th>
                     </tr>
                 </thead>

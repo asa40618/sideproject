@@ -1,6 +1,10 @@
 <?php
 
 require_once("./mydb-connect.php");
+if (!isset($_GET["id"])) {
+    header("location:404page.php");
+    die;
+}
 
 $id = $_GET["id"];
 $sql = "SELECT * FROM ch WHERE id=$id";

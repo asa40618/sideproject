@@ -18,6 +18,7 @@ $discount = $_POST["discount"];
 $discountCode = $_POST["discountCode"];
 $startDate = $_POST["startDate"];
 $endDate = $_POST["endDate"];
+$now = date('Y-m-d H:i:s');
 
 if (empty($_POST["discountName"])) {
     $data = [
@@ -77,7 +78,7 @@ if ($startDate > $endDate) {
 // var_dump($discountname,$countType,$discount,$discountCode,$startDate,$endDate,$now);
 
 
-$sql = "UPDATE ch SET discountName='$discountName',counTtype='$countType',discount='$discount',discountCode='$discountCode',startDate='$startDate',endDate='$endDate' WHERE id=$id";
+$sql = "UPDATE ch SET discountName='$discountName',counTtype='$countType',discount='$discount',discountCode='$discountCode',startDate='$startDate',endDate='$endDate',created_at='$now' WHERE id=$id";
 
 
 
