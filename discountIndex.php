@@ -2,9 +2,20 @@
 require_once("mydb-connect.php");
 
 
+// 區分固定折扣、趴數折扣
+$countType=$_GET["countType"];
+if($countType==1){
+  $discountType ="countType=1 AND";
+}
+elseif($countType==2){
+  $discountType ="countType=2 AND";
+}
+else{
+  $discountType = "";
+}
 
 // 計算頁數
-$sqlPage = "SELECT * FROM ch WHERE valid=1";
+$sqlPage = "SELECT * FROM ch WHERE $discountType valid=1";
 $resultPage = $conn->query($sqlPage);
 $numDiscount = $resultPage->num_rows;
 $totalPageCount = ceil($numDiscount / 10);
@@ -34,11 +45,10 @@ if ($type == 6) {
   $where = "startDate DESC";
 }
 
-// 區分固定折扣、趴數折扣
+ 
 
 
-
-$sql = "SELECT * FROM ch WHERE valid=1 ORDER BY $where LIMIT $start,10 ";
+$sql = "SELECT * FROM ch WHERE $discountType valid=1 ORDER BY $where LIMIT $start,10 ";
 
 $result = $conn->query($sql);
 $rows = $result->fetch_all(MYSQLI_ASSOC);
@@ -81,22 +91,29 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
     </form>
 
     <div>
-      <div class=" mb-2 col-auto">
+      <div class="mb-2">
         <a href="discountCreat.php" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
       </div>
 
-      <div class="btn-group float-end col-auto">
-        <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
-          排序條件
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="discountIndex.php?type=1">id升冪</a></li>
-          <li><a class="dropdown-item" href="discountIndex.php?type=2">id降冪</a></li>
-          <li><a class="dropdown-item" href="discountIndex.php?type=3">折扣升冪</a></li>
-          <li><a class="dropdown-item" href="discountIndex.php?type=4">折扣降冪</a></li>
-          <li><a class="dropdown-item" href="discountIndex.php?type=5">有效日期升冪</a></li>
-          <li><a class="dropdown-item" href="discountIndex.php?type=6">有效日期降冪</a></li>
-        </ul>
+      <div class="d-flex justify-content-end">
+        <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <a href="discountIndex.php?countType" type="button" class="btn btn-outline-primary">不區分</a>
+        <a href="discountIndex.php?countType=1" type="button" class="btn btn-outline-primary">固定折扣</a>
+          <a href="discountIndex.php?countType=2" type="button" class="btn btn-outline-primary me-2">百分比折扣</a>
+          </div>
+          <div class="btn-group float-end">
+            <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
+              排序條件
+            </button>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="discountIndex.php?type=1&countType=<?=$countType?>">id升冪</a></li>
+              <li><a class="dropdown-item" href="discountIndex.php?type=2&countType=<?=$countType?>">id降冪</a></li>
+              <li><a class="dropdown-item" href="discountIndex.php?type=3&countType=<?=$countType?>">折扣升冪</a></li>
+              <li><a class="dropdown-item" href="discountIndex.php?type=4&countType=<?=$countType?>">折扣降冪</a></li>
+              <li><a class="dropdown-item" href="discountIndex.php?type=5&countType=<?=$countType?>">有效日期升冪</a></li>
+              <li><a class="dropdown-item" href="discountIndex.php?type=6&countType=<?=$countType?>">有效日期降冪</a></li>
+            </ul>
+          </div>
       </div>
 
     </div>
@@ -172,7 +189,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
         <?php for ($i = 1; $i <= $totalPageCount; $i++) : ?>
           <li class="page-item <?php if ($page == $i) {
                                   echo "active";
-                                } ?>"><a class="page-link" href="discountIndex.php?page=<?= $i ?>&type=<?= $type ?>"><?= $i ?></a></li>
+                                } ?>"><a class="page-link" href="discountIndex.php?page=<?= $i ?>&type=<?= $type ?>&countType=<?=$countType?>"><?= $i ?></a></li>
         <?php endfor; ?>
         <li class="page-item <?php if (isset($_GET["page"]) && $_GET["page"] == $totalPageCount) {
                                 echo "disabled";
