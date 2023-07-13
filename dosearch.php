@@ -114,7 +114,7 @@ $totalPageCount = ceil($numDiscount / 10);
                 </div>
                 <div class="btn-group">
                     <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
-                        篩選條件
+                        排序條件
                     </button>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=1&<?php if (isset($countType)) {
