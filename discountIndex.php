@@ -3,12 +3,14 @@ require_once("mydb-connect.php");
 
 
 // 區分固定折扣、趴數折扣
+if(isset($_GET["countType"])){
 $countType=$_GET["countType"];
 if($countType==1){
   $discountType ="countType=1 AND";
 }
 elseif($countType==2){
   $discountType ="countType=2 AND";
+}
 }
 else{
   $discountType = "";
