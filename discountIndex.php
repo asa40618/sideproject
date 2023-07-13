@@ -3,16 +3,15 @@ require_once("mydb-connect.php");
 
 
 // 區分固定折扣、趴數折扣
-if(isset($_GET["countType"])){
-$countType=$_GET["countType"];
-if($countType==1){
-  $discountType ="countType=1 AND";
-}
-elseif($countType==2){
-  $discountType ="countType=2 AND";
-}
-}
-else{
+
+if (isset($_GET["countType"])) {
+  $countType = $_GET["countType"] ?? "";
+  if ($countType == 1) {
+    $discountType = "countType=1 AND";
+  } elseif ($countType == 2) {
+    $discountType = "countType=2 AND";
+  }
+} else {
   $discountType = "";
 }
 
@@ -47,7 +46,7 @@ if ($type == 6) {
   $where = "startDate DESC";
 }
 
- 
+
 
 
 $sql = "SELECT * FROM ch WHERE $discountType valid=1 ORDER BY $where LIMIT $start,10 ";
@@ -99,25 +98,40 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 
       <div class="d-flex justify-content-end">
         <div class="btn-group" role="group" aria-label="Basic outlined example">
-        <a href="discountIndex.php?countType" type="button" class="btn btn-outline-primary">不區分</a>
-        <a href="discountIndex.php?countType=1" type="button" class="btn btn-outline-primary">固定折扣</a>
-          <a href="discountIndex.php?countType=2" type="button" class="btn btn-outline-primary me-2">百分比折扣</a>
-          </div>
-          <div class="btn-group float-end">
-            <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
-              排序條件
-            </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="discountIndex.php?type=1&countType=<?=$countType?>">id升冪</a></li>
-              <li><a class="dropdown-item" href="discountIndex.php?type=2&countType=<?=$countType?>">id降冪</a></li>
-              <li><a class="dropdown-item" href="discountIndex.php?type=3&countType=<?=$countType?>">折扣升冪</a></li>
-              <li><a class="dropdown-item" href="discountIndex.php?type=4&countType=<?=$countType?>">折扣降冪</a></li>
-              <li><a class="dropdown-item" href="discountIndex.php?type=5&countType=<?=$countType?>">有效日期升冪</a></li>
-              <li><a class="dropdown-item" href="discountIndex.php?type=6&countType=<?=$countType?>">有效日期降冪</a></li>
-            </ul>
-          </div>
+          <a href="discountIndex.php" type="button" class="btn btn-outline-primary">不區分</a>
+          <a href="discountIndex.php?countType=1&<?php if (isset($type)) {
+                                                    echo "type=$type";
+                                                  } ?>" type="button" class="btn btn-outline-primary">固定折扣</a>
+          <a href="discountIndex.php?countType=2&<?php if (isset($type)) {
+                                                    echo "type=$type";
+                                                  } ?>" type="button" class="btn btn-outline-primary me-2">百分比折扣</a>
+        </div>
+        <div class="btn-group float-end">
+          <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
+            排序條件
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="discountIndex.php?type=1&<?php if (isset($countType)) {
+                                                                          echo "countType=$countType";
+                                                                        } ?>">id升冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex.php?type=2&<?php if (isset($countType)) {
+                                                                          echo "countType=$countType";
+                                                                        } ?>">id降冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex.php?type=3&<?php if (isset($countType)) {
+                                                                          echo "countType=$countType";
+                                                                        } ?>">折扣升冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex.php?type=4&<?php if (isset($countType)) {
+                                                                          echo "countType=$countType";
+                                                                        } ?>">折扣降冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex.php?type=5&<?php if (isset($countType)) {
+                                                                          echo "countType=$countType";
+                                                                        } ?>">有效日期升冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex.php?type=6&<?php if (isset($countType)) {
+                                                                          echo "countType=$countType";
+                                                                        } ?>">有效日期降冪</a></li>
+          </ul>
+        </div>
       </div>
-
     </div>
 
     <div>
@@ -184,24 +198,40 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
         <li class="page-item <?php if (!isset($_GET["page"]) || $_GET["page"] == 1) {
                                 echo "disabled";
                               } ?>">
-          <a class="page-link " href="discountIndex.php?page=<?= $page - 1 ?>" aria-label="Previous">
+          <a class="page-link " href="discountIndex.php?page=<?= $page - 1 ?>&
+          <?php if (isset($type)) {
+            echo "type=$type";
+          } ?>&<?php if (isset($countType)) {
+                  echo "countType=$countType";
+                } ?>" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
         <?php for ($i = 1; $i <= $totalPageCount; $i++) : ?>
-          <li class="page-item <?php if ($page == $i) {
-                                  echo "active";
-                                } ?>"><a class="page-link" href="discountIndex.php?page=<?= $i ?>&type=<?= $type ?>&countType=<?=$countType?>"><?= $i ?></a></li>
+          <li class="page-item 
+          <?php if ($page == $i) {
+            echo "active";
+          } ?>"><a class="page-link" href="discountIndex.php?page=<?= $i ?> &
+<?php if (isset($type)) {
+            echo "type=$type";
+          } ?>&<?php if (isset($countType)) {
+                  echo "countType=$countType";
+                } ?>"><?= $i ?></a></li>
         <?php endfor; ?>
         <li class="page-item <?php if (isset($_GET["page"]) && $_GET["page"] == $totalPageCount) {
                                 echo "disabled";
                               } ?> ">
-          <a class="page-link" href="discountIndex.php?page=<?= $page + 1 ?>" aria-label="Next">
+          <a class="page-link" href="discountIndex.php?page=<?= $page + 1 ?>&<?php if (isset($type)) {
+                                                                                echo "type=$type";
+                                                                              } ?>&<?php if (isset($countType)) {
+                                                                                      echo "countType=$countType";
+                                                                                    } ?>" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
       </ul>
     </nav>
+
     <div>共 <?= $numDiscount ?> 筆</div>
 
 

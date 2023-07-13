@@ -6,6 +6,18 @@ if (!isset($_GET["searchName"])) {
 }
 
 
+if (isset($_GET["countType"])) {
+    $countType = $_GET["countType"] ?? "";
+    if ($countType == 1) {
+        $discountType = "countType=1 AND";
+    } elseif ($countType == 2) {
+        $discountType = "countType=2 AND";
+    }
+} else {
+    $discountType = "";
+}
+
+
 $searchName = $_GET["searchName"] ?? "";
 
 $type = $_GET["type"] ?? 1;
@@ -32,18 +44,17 @@ $page = $_GET["page"] ?? 1;
 $start = ($page - 1) * 10;
 
 // 篩選節果
-$sql = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%' AND valid=1 ORDER BY $where LIMIT $start,10";
+$sql = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%' AND $discountType valid=1 ORDER BY $where LIMIT $start,10";
 $result = $conn->query($sql);
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 
 //製作page
-$sqlforPage = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%'AND valid=1";
+$sqlforPage = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%' AND $discountType valid=1";
 $resultforPage = $conn->query($sqlforPage);
 $numDiscount = $resultforPage->num_rows;
 $totalPageCount = ceil($numDiscount / 10);
 
-// var_dump($rows)."<br>";
-// var_dump($numDiscount)."<br>";
+
 ?>
 
 <!doctype html>
@@ -91,21 +102,41 @@ $totalPageCount = ceil($numDiscount / 10);
 
         <div>
             <a href="discountCreat.php" class="btn btn-primary mb-2"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
-
-            
-
-            <div class="btn-group float-end">
-                <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
-                    篩選條件
-                </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=1">id升冪</a></li>
-                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=2">id降冪</a></li>
-                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=3">折扣升冪</a></li>
-                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=4">折扣降冪</a></li>
-                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=5">有效日期升冪</a></li>
-                    <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=6">有效日期降冪</a></li>
-                </ul>
+            <div class="d-flex justify-content-end">
+                <div class="btn-group" role="group" aria-label="Basic outlined example">
+                    <a href="dosearch.php?searchName=<?= $searchName ?>" type="button" class="btn btn-outline-primary">不區分</a>
+                    <a href="dosearch.php?countType=1&searchName=<?= $searchName ?>&<?php if (isset($type)) {
+                                                                                        echo "type=$type";
+                                                                                    } ?>" type="button" class="btn btn-outline-primary">固定折扣</a>
+                    <a href="dosearch.php?countType=2&searchName=<?= $searchName ?>&<?php if (isset($type)) {
+                                                                                        echo "type=$type";
+                                                                                    } ?>" type="button" class="btn btn-outline-primary me-2">百分比折扣</a>
+                </div>
+                <div class="btn-group">
+                    <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
+                        篩選條件
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=1&<?php if (isset($countType)) {
+                                                                                                                    echo "countType=$countType";
+                                                                                                                } ?>">id升冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=2&<?php if (isset($countType)) {
+                                                                                                                    echo "countType=$countType";
+                                                                                                                } ?>">id降冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=3&<?php if (isset($countType)) {
+                                                                                                                    echo "countType=$countType";
+                                                                                                                } ?>">折扣升冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=4&<?php if (isset($countType)) {
+                                                                                                                    echo "countType=$countType";
+                                                                                                                } ?>">折扣降冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=5&<?php if (isset($countType)) {
+                                                                                                                    echo "countType=$countType";
+                                                                                                                } ?>">有效日期升冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&type=6&<?php if (isset($countType)) {
+                                                                                                                    echo "countType=$countType";
+                                                                                                                } ?>">有效日期降冪</a></li>
+                    </ul>
+                </div>
             </div>
 
         </div>
@@ -173,7 +204,11 @@ $totalPageCount = ceil($numDiscount / 10);
                 <li class="page-item">
                     <a class="page-link <?php if ($page - 1 == 0) {
                                             echo "disabled";
-                                        } ?>" href="dosearch.php?searchName=coupon&page=<?= $page - 1 ?>" aria-label="Previous">
+                                        } ?>" href="dosearch.php?searchName=<?= $searchName ?>&<?php if (isset($type)) {
+                                                                                                    echo "type=$type";
+                                                                                                } ?>&<?php if (isset($countType)) {
+                                                                                                                                                echo "countType=$countType";
+                                                                                                                                            } ?>&page=<?= $page - 1 ?>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -181,13 +216,21 @@ $totalPageCount = ceil($numDiscount / 10);
                 <?php for ($i = 1; $i <= $totalPageCount; $i++) : ?>
                     <li class="page-item"><a class="page-link <?php if ($i == $page) {
                                                                     echo "active";
-                                                                } ?>" href="dosearch.php?searchName=<?= $searchName ?>&page=<?= $i ?>&type=<?= $type ?>"><?= $i ?></a></li>
+                                                                } ?>" href="dosearch.php?searchName=<?= $searchName ?>&<?php if (isset($type)) {
+                                                                                                                            echo "type=$type";
+                                                                                                                        } ?>&<?php if (isset($countType)) {
+                                                                                                                                                                        echo "countType=$countType";
+                                                                                                                                                                    } ?>&page=<?= $i ?>"><?= $i ?></a></li>
                 <?php endfor  ?>
 
                 <li class="page-item">
                     <a class="page-link <?php if ($page == $totalPageCount) {
                                             echo "disabled";
-                                        } ?>" href="dosearch.php?searchName=coupon&page=<?= $page + 1 ?>" aria-label="Next">
+                                        } ?>" href="dosearch.php?searchName=<?= $searchName ?>&<?php if (isset($type)) {
+                                                                                                    echo "type=$type";
+                                                                                                } ?>&<?php if (isset($countType)) {
+                                                                                                                                                echo "countType=$countType";
+                                                                                                                                            } ?>&page=<?= $page + 1 ?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>
