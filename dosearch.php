@@ -100,10 +100,10 @@ $totalPageCount = ceil($numDiscount / 10);
             </div>
         </form>
 
-        <div>
-            <a href="discountCreat.php" class="btn btn-primary mb-2"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
-            <div class="d-flex justify-content-end">
-                <div class="btn-group" role="group" aria-label="Basic outlined example">
+        <div class="my-2">
+            <a href="discountCreat.php" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
+            <div class="d-flex justify-content-end mb-4">
+                <div class="btn-group me-2" role="group" aria-label="Basic outlined example">
                     <a href="dosearch.php?searchName=<?= $searchName ?>" type="button" class="btn btn-outline-primary">不區分</a>
                     <a href="dosearch.php?countType=1&searchName=<?= $searchName ?>&<?php if (isset($type)) {
                                                                                         echo "type=$type";
@@ -145,32 +145,32 @@ $totalPageCount = ceil($numDiscount / 10);
             <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>優惠券名稱</th>
-                        <th>折扣內容</th>
-                        <th>折扣代碼</th>
-                        <th>有效期限</th>
-                        <th>建立時間</th>
-                        <th></th>
+                        <th class="text-center">ID</th>
+                        <th class="text-center">優惠券名稱</th>
+                        <th class="text-center">折扣內容</th>
+                        <th class="text-center">折扣代碼</th>
+                        <th class="text-center">有效期限</th>
+                        <th class="text-center">建立時間</th>
                         <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php foreach ($rows as $row) : ?>
                         <tr>
-                            <td><?= $row["id"] ?></td>
-                            <td><?= $row["discountName"] ?></td>
-                            <td><?php if ($row["countType"] == 1) {
-                                    echo $row["discount"] . "元";
-                                } else {
-                                    echo $row["discount"] . "%";
-                                }
-                                ?></td>
-                            <td><?= $row["discountCode"] ?></td>
-                            <td><?= $row["startDate"] ?> ~ <?= $row["endDate"] ?></td>
-                            <td><?= $row["created_at"] ?></td>
-                            <td><a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a></td>
-                            <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">刪除 <i class="fa-solid fa-trash-can"></i> </button>
+                            <td class="text-center"><?= $row["id"] ?></td>
+                            <td class="text-center"><?= $row["discountName"] ?></td>
+                            <td class="text-center"><?php if ($row["countType"] == 1) {
+                                                        echo $row["discount"] . "元";
+                                                    } else {
+                                                        echo $row["discount"] . "%";
+                                                    }
+                                                    ?></td>
+                            <td class="text-center"><?= $row["discountCode"] ?></td>
+                            <td class="text-center"><?= $row["startDate"] ?> ~ <?= $row["endDate"] ?></td>
+                            <td class="text-center"><?= $row["created_at"] ?></td>
+                            <td class="d-flex justify-content-evenly">
+                                <a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a>
+                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">刪除 <i class="fa-solid fa-trash-can"></i> </button>
                             </td>
                         </tr>
 
@@ -207,8 +207,8 @@ $totalPageCount = ceil($numDiscount / 10);
                                         } ?>" href="dosearch.php?searchName=<?= $searchName ?>&<?php if (isset($type)) {
                                                                                                     echo "type=$type";
                                                                                                 } ?>&<?php if (isset($countType)) {
-                                                                                                                                                echo "countType=$countType";
-                                                                                                                                            } ?>&page=<?= $page - 1 ?>" aria-label="Previous">
+                                                                                                            echo "countType=$countType";
+                                                                                                        } ?>&page=<?= $page - 1 ?>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
@@ -219,8 +219,8 @@ $totalPageCount = ceil($numDiscount / 10);
                                                                 } ?>" href="dosearch.php?searchName=<?= $searchName ?>&<?php if (isset($type)) {
                                                                                                                             echo "type=$type";
                                                                                                                         } ?>&<?php if (isset($countType)) {
-                                                                                                                                                                        echo "countType=$countType";
-                                                                                                                                                                    } ?>&page=<?= $i ?>"><?= $i ?></a></li>
+                                                                                                                                    echo "countType=$countType";
+                                                                                                                                } ?>&page=<?= $i ?>"><?= $i ?></a></li>
                 <?php endfor  ?>
 
                 <li class="page-item">
@@ -229,8 +229,8 @@ $totalPageCount = ceil($numDiscount / 10);
                                         } ?>" href="dosearch.php?searchName=<?= $searchName ?>&<?php if (isset($type)) {
                                                                                                     echo "type=$type";
                                                                                                 } ?>&<?php if (isset($countType)) {
-                                                                                                                                                echo "countType=$countType";
-                                                                                                                                            } ?>&page=<?= $page + 1 ?>" aria-label="Next">
+                                                                                                            echo "countType=$countType";
+                                                                                                        } ?>&page=<?= $page + 1 ?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

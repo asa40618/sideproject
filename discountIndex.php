@@ -91,13 +91,13 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
       </div>
     </form>
 
-    <div>
-      <div class="mb-2">
+    <div class="my-2">
+      <div>
         <a href="discountCreat.php" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
       </div>
 
-      <div class="d-flex justify-content-end">
-        <div class="btn-group" role="group" aria-label="Basic outlined example">
+      <div class="d-flex justify-content-end mb-4">
+        <div class="btn-group me-2" role="group" aria-label="Basic outlined example">
           <a href="discountIndex.php" type="button" class="btn btn-outline-primary">不區分</a>
           <a href="discountIndex.php?countType=1&<?php if (isset($type)) {
                                                     echo "type=$type";
@@ -106,6 +106,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                                                     echo "type=$type";
                                                   } ?>" type="button" class="btn btn-outline-primary me-2">百分比折扣</a>
         </div>
+
         <div class="btn-group float-end">
           <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
             排序條件
@@ -131,39 +132,41 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                                                                         } ?>">有效日期降冪</a></li>
           </ul>
         </div>
+
       </div>
+
     </div>
 
     <div>
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>優惠券名稱</th>
-            <th>折扣內容</th>
-            <th>折扣代碼</th>
-            <th>有效期限</th>
-            <th>建立時間</th>
-            <th></th>
+            <th class="text-center">ID</th>
+            <th class="text-center">優惠券名稱</th>
+            <th class="text-center">折扣內容</th>
+            <th class="text-center">折扣代碼</th>
+            <th class="text-center">有效期限</th>
+            <th class="text-center">建立時間</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           <?php foreach ($rows as $row) : ?>
             <tr>
-              <td><?= $row["id"] ?></td>
-              <td><?= $row["discountName"] ?></td>
-              <td><?php if ($row["countType"] == 1) {
-                    echo $row["discount"] . "元";
-                  } else {
-                    echo $row["discount"] . "%";
-                  }
-                  ?></td>
-              <td><?= $row["discountCode"] ?></td>
-              <td><?= $row["startDate"] ?> ~ <?= $row["endDate"] ?></td>
-              <td><?= $row["created_at"] ?></td>
-              <td><a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a></td>
-              <td><button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $row["id"] ?>">刪除 <i class="fa-solid fa-trash-can"></i> </button>
+              <td class="text-center"><?= $row["id"] ?></td>
+              <td class="text-center"><?= $row["discountName"] ?></td>
+              <td class="text-center"><?php if ($row["countType"] == 1) {
+                                        echo $row["discount"] . "元";
+                                      } else {
+                                        echo $row["discount"] . "%";
+                                      }
+                                      ?></td>
+              <td class="text-center"><?= $row["discountCode"] ?></td>
+              <td class="text-center"><?= $row["startDate"] ?> ~ <?= $row["endDate"] ?></td>
+              <td class="text-center"><?= $row["created_at"] ?></td>
+              <td class="d-flex justify-content-evenly">
+                <a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a>
+                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $row["id"] ?>">刪除 <i class="fa-solid fa-trash-can"></i> </button>
               </td>
             </tr>
 
