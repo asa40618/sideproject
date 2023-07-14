@@ -1,21 +1,22 @@
 <?php
 require_once("mydb-connect.php");
 
+// 每頁幾筆
+$page = $_GET["page"] ?? 1;
+$countPerPage=$_GET["countPerPage"]??10;
+$start = ($page - 1) * $countPerPage;
+
 // 計算頁數
 $sqlPage = "SELECT * FROM ch WHERE valid=1";
 $resultPage = $conn->query($sqlPage);
 $numDiscount = $resultPage->num_rows;
-$totalPageCount = ceil($numDiscount / 10);
-
-// 每頁幾筆
-$page = $_GET["page"] ?? 1;
-$start = ($page - 1) * 10;
+$totalPageCount = ceil($numDiscount / $countPerPage);
 
 //升冪降冪控制
 include("./modal/sortType.php");
 
 
-$sql = "SELECT * FROM ch WHERE valid=1 ORDER BY $where LIMIT $start,10 ";
+$sql = "SELECT * FROM ch WHERE valid=1 ORDER BY $where LIMIT $start,$countPerPage ";
 $result = $conn->query($sql);
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 ?>
@@ -56,6 +57,18 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
       </div>
 
       <div class="d-flex justify-content-end mb-4">
+      <div class="btn-group me-2">
+          <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
+            單頁筆數
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="discountIndex.php?countPerPage=10">10</a></li>
+            <li><a class="dropdown-item" href="discountIndex.php?countPerPage=20">20</a></li>
+            <li><a class="dropdown-item" href="discountIndex.php?countPerPage=30">30</a></li>
+            <li><a class="dropdown-item" href="discountIndex.php?countPerPage=40">40</a></li>
+            <li><a class="dropdown-item" href="discountIndex.php?countPerPage=50">50</a></li>
+          </ul>
+        </div>
         <div class="btn-group float-end">
           <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
             排序條件
@@ -113,16 +126,16 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
         <li class="page-item <?php if (!isset($_GET["page"]) || $_GET["page"] == 1) {
                                 echo "disabled";} ?>">
           <a class="page-link " href="discountIndex.php?page=<?= $page - 1 ?>&<?php if (isset($type)) {
-                                                                                echo "type=$type";} ?>&" aria-label="Previous">
+                                                                                echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
         <?php for ($i = 1; $i <= $totalPageCount; $i++) : ?>
-          <li class="page-item <?php if ($page == $i) { echo "active";} ?>"><a class="page-link" href="discountIndex.php?page=<?= $i ?> &<?php if (isset($type)) { echo "type=$type";} ?>"><?= $i ?></a>
+          <li class="page-item <?php if ($page == $i) { echo "active";} ?>"><a class="page-link" href="discountIndex.php?page=<?= $i ?> &<?php if (isset($type)) { echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>"><?= $i ?></a>
           </li>
         <?php endfor; ?>
         <li class="page-item <?php if (isset($_GET["page"]) && $_GET["page"] == $totalPageCount) {echo "disabled";} ?> ">
-          <a class="page-link" href="discountIndex.php?page=<?= $page + 1 ?>&<?php if (isset($type)) { echo "type=$type";} ?>" aria-label="Next">
+          <a class="page-link" href="discountIndex.php?page=<?= $page + 1 ?>&<?php if (isset($type)) { echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
