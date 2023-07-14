@@ -19,7 +19,7 @@
   <div class="container">
 
     <label for="discountName">優惠券名稱</label>
-    <input type="text" class="form-control" name="discountName" id="discountName">
+    <input type="text" class="form-control" name="discountName" placeholder="例:感恩回饋季、歡迎新會員優惠券" id="discountName">
 
     <label for="countType">折扣種類</label>
     <select type="text" class="form-select" name="countType" id="countType">
@@ -27,7 +27,7 @@
       <option value="2">百分比折扣</option>
     </select>
     <label for="discount">折扣</label>
-    <input type="text" class="form-control" name="discount" placeholder="請輸入金額或折扣" id="discount">
+    <input type="text" class="form-control" name="discount" placeholder="固定金額請輸入任意數字、百分比金額請輸入0~100" id="discount">
     <label for="discountCode">折扣代碼</label>
     <input type="text" class="form-control" name="discountCode" id="discountCode">
     <div class="row my-3 align-items-center">
