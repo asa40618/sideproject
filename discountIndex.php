@@ -82,14 +82,34 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
       <a href="./discountIndex.php" class="h2 text-decoration-none">優惠券目錄</a>
     </div>
 
-    <form action="dosearch.php">
-      <div class="my-2 align-items-center row">
-        <div class="col-auto">
-          <input type="text" class="form-control" name="searchName" placeholder="搜尋優惠券名稱">
-        </div>
-        <button class="btn btn-primary col-auto me-2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+    <!--  -->
+    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-magnifying-glass"></i></button>
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasRightLabel">搜尋條件</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
-    </form>
+      <div class="offcanvas-body">
+        <form action="dosearch.php">
+          <div class="my-3">
+            <label for="">名稱搜尋</label>
+            <input type="text" class="form-control" name="searchName" placeholder="搜尋優惠券名稱">
+          </div>
+          <div class="my-3">
+            <label for="">折扣價格搜尋</label>
+            <div class="d-flex align-items-center">
+              <input type="text" class="form-control px-2" name="discountmin" placeholder="最小折扣">
+              <div> ~ </div>
+              <input type="text" class="form-control px-2" name="discountMax" placeholder="最大折扣">
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">搜尋</button>
+        </form>
+      </div>
+    </div>
+    <!--  -->
+
 
     <div class="my-2">
       <div>

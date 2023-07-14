@@ -38,7 +38,7 @@ if (empty($_POST["discount"])) {
 }
 
 if ($countType == 2) {
-    $percentDiscountJudge = "/^(100|[1-9][0-9]?|0)$/";
+    $percentDiscountJudge = "/^(100|[1-9]?\d)$/";
     if (!preg_match($percentDiscountJudge, $discount)) {
         $data = [
             "status" => 0, //狀態碼，判斷是否連線成功

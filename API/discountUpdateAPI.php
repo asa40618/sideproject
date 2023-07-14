@@ -38,6 +38,18 @@ if (empty($_POST["discount"])) {
     die;
 }
 
+if ($countType == 2) {
+    $percentDiscountJudge = "/^(100|\d?\d?|0)$/";
+    if (!preg_match($percentDiscountJudge, $discount)) {
+        $data = [
+            "status" => 0, //狀態碼，判斷是否連線成功
+            "message" => "百分比折扣請填寫數字1~100以內" //失敗的訊息
+        ];
+        echo json_encode($data);
+        die;
+    }
+}
+
 if (empty($_POST["discountCode"])) {
     $data = [
         "status" => 0, //狀態碼，判斷是否連線成功

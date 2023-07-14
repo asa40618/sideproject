@@ -2,24 +2,23 @@
 require_once("mydb-connect.php");
 if (!isset($_GET["searchName"])) {
     header("location:404page.php");
-    die;
+    exit;
 }
 
-
+// 分類%還是固定金額
 if (isset($_GET["countType"])) {
     $countType = $_GET["countType"] ?? "";
     if ($countType == 1) {
         $discountType = "countType=1 AND";
     } elseif ($countType == 2) {
-        $discountType = "countType=2 AND";
+        $discountType = "countType=2  AND";
     }
 } else {
     $discountType = "";
 }
 
 
-$searchName = $_GET["searchName"] ?? "";
-
+//排序
 $type = $_GET["type"] ?? 1;
 if ($type == 1) {
     $where = "id ASC";
@@ -40,11 +39,25 @@ if ($type == 6) {
     $where = "startDate DESC";
 }
 
-$page = $_GET["page"] ?? 1;
-$start = ($page - 1) * 10;
+// 金額篩選
+$discountmin = $_GET["discountmin"];
+$discountMax = $_GET["discountMax"];
+if (empty($discountmin)) {
+    $discountmin = 0;
+}
+if (empty($discountMax)) {
+    $discountMax = 99999999;
+}
+$discountRange = "discount >= $discountmin AND discount <= $discountMax AND";
+
+$page = $_GET["page"] ?? 1; //起始頁數
+$start = ($page - 1) * 10; //開始抓的id
 
 // 篩選節果
-$sql = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%' AND $discountType valid=1 ORDER BY $where LIMIT $start,10";
+$searchName = $_GET["searchName"] ?? "";
+
+$sql = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%' AND $discountType $discountRange valid=1 ORDER BY $where LIMIT $start,10";
+
 $result = $conn->query($sql);
 $rows = $result->fetch_all(MYSQLI_ASSOC);
 
@@ -53,6 +66,8 @@ $sqlforPage = "SELECT * FROM ch WHERE discountName LIKE '%$searchName%' AND $dis
 $resultforPage = $conn->query($sqlforPage);
 $numDiscount = $resultforPage->num_rows;
 $totalPageCount = ceil($numDiscount / 10);
+
+// Page的get變數(為正確換頁)
 
 
 ?>

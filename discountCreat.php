@@ -27,7 +27,7 @@
       <option value="2">百分比折扣</option>
     </select>
     <label for="discount">折扣</label>
-    <input type="text" class="form-control" name="discount" placeholder="固定金額請輸入任意數字、百分比金額請輸入0~100" id="discount">
+    <input type="text" class="form-control" name="discount" placeholder="固定金額請輸入任意數字、百分比金額請輸入1~100" id="discount">
     <label for="discountCode">折扣代碼</label>
     <input type="text" class="form-control" name="discountCode" id="discountCode">
     <div class="row my-3 align-items-center">
