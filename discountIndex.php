@@ -92,6 +92,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             <th class="text-center">ID</th>
             <th class="text-center">優惠券名稱</th>
             <th class="text-center">折扣內容</th>
+            <th class="text-center">最低消費</th>
             <th class="text-center">折扣代碼</th>
             <th class="text-center">有效期限</th>
             <th class="text-center">最後更新時間</th>
@@ -108,6 +109,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
                  echo $row["discount"] . "元";
               } else {echo $row["discount"] . "%";
               } ?></td>
+              <td class="text-center"><?= $row["minimum"] ?></td>
               <td class="text-center"><?= $row["discountCode"] ?></td>
               <td class="text-center"><?= $row["startDate"] ?> ~ <?= $row["endDate"] ?></td>
               <td class="text-center"><?= $row["created_at"] ?></td>

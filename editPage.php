@@ -32,23 +32,7 @@ $row = $result->fetch_assoc();
 
 <body>
 
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title fs-5" id="exampleModalLabel">即時訊息</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    優惠券更新成功
-                </div>
-                <div class="modal-footer">
-                    <a href="discountIndex.php" type="button" class="btn btn-secondary">返回列表</a>
-                    <a href="editPage.php?id=<?= $row["id"] ?>" type="button" class="btn btn-primary">繼續更新</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include("./modal/updateSuccess.php") ?>
 
     <div class="container">
         <h2 class="my-2">優惠券編輯</h2>
@@ -58,18 +42,18 @@ $row = $result->fetch_assoc();
                 <thead>
                     <input type="hidden" value="<?= $row["id"] ?>" name="id" id="id">
                     <tr>
-                        <th>優惠券名稱</th>
+                        <th class="align-middle">優惠券名稱</th>
                         <td>
                             <input type="text" class="form-control" id="discountName" name="discountName" value="<?= $row["discountName"] ?>">
                         </td>
                     </tr>
                     <tr>
-                        <th>折扣內容</th>
+                        <th class="align-middle">折扣內容</th>
                         <td><input type="text" class="form-control" id="discount" name="discount" value="<?= $row["discount"] ?>">
                         </td>
                     </tr>
                     <tr>
-                        <th>折扣種類</th>
+                        <th class="align-middle">折扣種類</th>
                         <td>
                             <select type="text" class="form-select" id="countType" name="countType" id="CountType">
                                 <?php if ($row["countType"] == 1) : ?>
@@ -82,17 +66,22 @@ $row = $result->fetch_assoc();
                             </select>
                     </tr>
                     <tr>
-                        <th>折扣代碼</th>
+                        <th class="align-middle">最低消費</th>
+                        <td><input type="text" class="form-control" id="minimum" name="minimum" value="<?= $row["minimum"] ?>">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="align-middle">折扣代碼</th>
                         <td><input type="text" class="form-control" id="discountCode" name="discountCode" value="<?= $row["discountCode"] ?>">
                         </td>
                     </tr>
                     <tr>
-                        <th>開始日期</th>
+                        <th class="align-middle">開始日期</th>
                         <td><input type="date" class="form-control" id="startDate" name="startDate" value="<?= $row["startDate"] ?>">
                         </td>
                     </tr>
                     <tr>
-                        <th>結束日期</th>
+                        <th class="align-middle">結束日期</th>
                         <td><input type="date" class="form-control" id="endDate" name="endDate" value="<?= $row["endDate"] ?>">
                         </td>
                     </tr>
@@ -121,6 +110,7 @@ $row = $result->fetch_assoc();
         const discountName = document.querySelector("#discountName")
         const countType = document.querySelector("#countType")
         const discount = document.querySelector("#discount")
+        const minimum = document.querySelector("#minimum")
         const discountCode = document.querySelector("#discountCode")
         const startDate = document.querySelector("#startDate")
         const endDate = document.querySelector("#endDate")
@@ -132,6 +122,7 @@ $row = $result->fetch_assoc();
             let discountNameValue = discountName.value
             let countTypeValue = countType.value
             let discountValue = discount.value
+            let minimumValue = minimum.value
             let discountCodeValue = discountCode.value
             let startDateValue = startDate.value
             let endDateValue = endDate.value
@@ -146,6 +137,7 @@ $row = $result->fetch_assoc();
                         discountName: discountNameValue,
                         countType: countTypeValue,
                         discount: discountValue,
+                        minimum: minimumValue,
                         discountCode: discountCodeValue,
                         startDate: startDateValue,
                         endDate: endDateValue

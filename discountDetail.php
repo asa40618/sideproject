@@ -47,6 +47,10 @@ $row = $result->fetch_assoc();
                 } ?></td>
           </tr>
           <tr>
+            <th>最低消費</th>
+            <td><?= $row["minimum"] ?></td>
+          </tr>
+          <tr>
             <th>折扣代碼</th>
             <td><?= $row["discountCode"] ?></td>
           </tr>

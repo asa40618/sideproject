@@ -15,6 +15,7 @@ if (!isset($_POST["discountName"])) {
 $discountName = $_POST["discountName"];
 $countType = $_POST["countType"];
 $discount = $_POST["discount"];
+$minimum = $_POST["minimum"];
 $discountCode = $_POST["discountCode"];
 $startDate = $_POST["startDate"];
 $endDate = $_POST["endDate"];
@@ -47,6 +48,10 @@ if ($countType == 2) {
         echo json_encode($data);
         die;
     }
+}
+
+if(empty($minimum)){
+    $minimum="0";
 }
 
 if (empty($_POST["discountCode"])) {
@@ -90,7 +95,7 @@ $now = date('Y-m-d H:i:s');
 // var_dump($discountname,$countType,$discount,$discountCode,$startDate,$endDate,$now);
 
 
-$sql = "INSERT INTO ch (discountName,counTtype,discount,discountCode,startDate,endDate,created_at,valid) VALUES ('$discountName','$countType','$discount','$discountCode','$startDate','$endDate','$now','1')";
+$sql = "INSERT INTO ch (discountName,counTtype,discount,minimum,discountCode,startDate,endDate,created_at,valid) VALUES ('$discountName','$countType','$discount','$minimum','$discountCode','$startDate','$endDate','$now','1')";
 
 
 

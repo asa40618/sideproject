@@ -39,6 +39,14 @@
       </div>
 
       <div class="my-2">
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">最低消費金額(可選)</label>
+        </div>
+        <input type="text" class="form-control minimum" name="minimum" id="minimum" placeholder="請輸入最低消費金額" disabled>
+      </div>
+
+      <div class="my-2">
       <label for="discountCode">折扣代碼</label>
       <input type="text" class="form-control" name="discountCode" id="discountCode">
       </div>
@@ -92,16 +100,31 @@
       const discountName = document.querySelector("#discountName")
       const countType = document.querySelector("#countType")
       const discount = document.querySelector("#discount")
+      const minimum = document.querySelector("#minimum")
       const discountCode = document.querySelector("#discountCode")
       const startDate = document.querySelector("#startDate")
       const endDate = document.querySelector("#endDate")
-
+      const flexSwitchCheckDefault = document.querySelector("#flexSwitchCheckDefault")
+      const minimumChange = document.querySelector(".minimum")
+      
       const warningText = document.querySelector("#warningText")
+
+
+      flexSwitchCheckDefault.addEventListener("click",function(){
+        if(minimumChange.disabled){
+          minimumChange.removeAttribute("disabled")}
+        else{  
+            minimumChange.setAttribute("disabled","disabled")
+          }
+      })
+      
+
       send.addEventListener("click", function() {
 
         let discountNameValue = discountName.value
         let countTypeValue = countType.value
         let discountValue = discount.value
+        let minimumValue = minimum.value
         let discountCodeValue = discountCode.value
         let startDateValue = startDate.value
         let endDateValue = endDate.value
@@ -114,6 +137,7 @@
               discountName: discountNameValue,
               countType: countTypeValue,
               discount: discountValue,
+              minimum:minimumValue,
               discountCode: discountCodeValue,
               startDate: startDateValue,
               endDate: endDateValue
