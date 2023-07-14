@@ -26,6 +26,21 @@
                     <input type="date" class="form-control px-2" name="dateMax" placeholder="最大日期">
                 </div>
             </div>
+            <label for="">折扣分類</label>
+            <div class="d-flex justify-content-start mb-4">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="countType" id="inlineRadio1" value="1">
+                    <label class="form-check-label" for="inlineRadio1">固定折扣</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="countType" id="inlineRadio2" value="2">
+                    <label class="form-check-label" for="inlineRadio2">百分比折扣</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input active" type="radio" name="countType" id="inlineRadio2" value="0">
+                    <label class="form-check-label " for="inlineRadio2">不區分</label>
+                </div>
+            </div>
             <button type="submit" class="btn btn-primary">搜尋</button>
         </form>
     </div>

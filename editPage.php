@@ -44,7 +44,7 @@ $row = $result->fetch_assoc();
                 </div>
                 <div class="modal-footer">
                     <a href="discountIndex.php" type="button" class="btn btn-secondary">返回列表</a>
-                    <a href="editPage.php?id=<?=$row["id"] ?>" type="button" class="btn btn-primary">繼續更新</a>
+                    <a href="editPage.php?id=<?= $row["id"] ?>" type="button" class="btn btn-primary">繼續更新</a>
                 </div>
             </div>
         </div>
@@ -102,7 +102,7 @@ $row = $result->fetch_assoc();
         </div>
         <div class="d-flex align-items-center">
             <button class="btn btn-primary me-2" id="send"> <i class="fa-regular fa-square-check"></i> 編輯完成</button>
-            <a href="discountDetail.php?id=<?=$row["id"] ?>" class="btn btn-primary me-2"> <i class="fa-solid fa-reply"></i>  返回</a>
+            <a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary me-2"> <i class="fa-solid fa-reply"></i> 返回</a>
             <div class="text-danger" id="warningText"></div>
         </div>
 
@@ -117,22 +117,17 @@ $row = $result->fetch_assoc();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
     <script>
-        const id=document.querySelector("#id")
+        const id = document.querySelector("#id")
         const discountName = document.querySelector("#discountName")
         const countType = document.querySelector("#countType")
         const discount = document.querySelector("#discount")
         const discountCode = document.querySelector("#discountCode")
         const startDate = document.querySelector("#startDate")
         const endDate = document.querySelector("#endDate")
-        const send=document.querySelector("#send")
-
+        const send = document.querySelector("#send")
         const warningText = document.querySelector("#warningText")
 
-
-
-
         send.addEventListener("click", function() {
-
             let idvalue = id.value
             let discountNameValue = discountName.value
             let countTypeValue = countType.value
@@ -147,7 +142,7 @@ $row = $result->fetch_assoc();
                     url: "API/discountUpdateAPI.php",
                     dataType: "json",
                     data: {
-                        id:idvalue,
+                        id: idvalue,
                         discountName: discountNameValue,
                         countType: countTypeValue,
                         discount: discountValue,
@@ -155,7 +150,6 @@ $row = $result->fetch_assoc();
                         startDate: startDateValue,
                         endDate: endDateValue
                     }
-
                 })
                 .done(function(response) {
                     console.log(response)
@@ -167,12 +161,8 @@ $row = $result->fetch_assoc();
                         // $('#myModal').modal('show');
                         const modal = new bootstrap.Modal(document.getElementById('myModal'));
                         modal.show();
-
                     }
-                }).fail(function(jqXHR, textStatus) {
-
-
-                });
+                }).fail(function(jqXHR, textStatus) {});
         })
     </script>
 

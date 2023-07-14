@@ -2,6 +2,7 @@
 
 require_once("./mydb-connect.php");
 
+
 $id = $_GET["id"];
 $sql = "SELECT * FROM ch WHERE id=$id";
 $result = $conn->query($sql);
@@ -18,12 +19,9 @@ $row = $result->fetch_assoc();
   <!-- Required meta tags -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
   <!-- Bootstrap CSS v5.2.1 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 </head>
 
 <body>
@@ -63,7 +61,7 @@ $row = $result->fetch_assoc();
         </thead>
       </table>
     </div>
-    <a href="editPage.php?id=<?=$id ?>" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> 編輯</a>
+    <a href="editPage.php?id=<?= $id ?>" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> 編輯</a>
     <a href="discountIndex.php" class="btn btn-primary"> <i class="fa-solid fa-reply"></i> 返回列表 </a>
   </div>
   <!-- Bootstrap JavaScript Libraries -->
