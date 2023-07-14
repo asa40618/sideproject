@@ -87,7 +87,6 @@ $totalPageCount = ceil($numDiscount / 10);
         </div>
 
         <div class="my-3">
-
             <div class="d-flex">
                 <button class="btn btn-primary me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-magnifying-glass"></i> 搜尋</button>
                 <div>
@@ -95,9 +94,6 @@ $totalPageCount = ceil($numDiscount / 10);
                 </div>
                 <a href="discountIndex.php" class="btn btn-primary col-auto"><i class="fa-solid fa-reply"></i> 返回列表</a>
             </div>
-
-
-
             <div class="d-flex justify-content-end mb-4">
                 <div class="btn-group">
                     <button class="form-select " data-bs-toggle="dropdown" aria-expanded="false">
@@ -113,7 +109,6 @@ $totalPageCount = ceil($numDiscount / 10);
                     </ul>
                 </div>
             </div>
-
         </div>
 
         <div>
