@@ -74,46 +74,44 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 
 <body>
 
+  <!--搜尋sidebar  -->
+  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas-header">
+      <h5 class="offcanvas-title" id="offcanvasRightLabel">搜尋條件</h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+      <form action="dosearch.php">
+        <div class="my-3">
+          <label for="">名稱搜尋</label>
+          <input type="text" class="form-control" name="searchName" placeholder="搜尋優惠券名稱">
+        </div>
+        <div class="my-3">
+          <label for="">折扣價格搜尋</label>
+          <div class="d-flex align-items-center">
+            <input type="text" class="form-control px-2" name="discountmin" placeholder="最小折扣">
+            <div> ~ </div>
+            <input type="text" class="form-control px-2" name="discountMax" placeholder="最大折扣">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">搜尋</button>
+      </form>
+    </div>
+  </div>
+  <!--搜尋sidebar  -->
+
   <div class="container">
-
-
 
     <div class="mt-2">
       <a href="./discountIndex.php" class="h2 text-decoration-none">優惠券目錄</a>
     </div>
 
-    <!--  -->
-    <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-magnifying-glass"></i></button>
-
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-      <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasRightLabel">搜尋條件</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-      </div>
-      <div class="offcanvas-body">
-        <form action="dosearch.php">
-          <div class="my-3">
-            <label for="">名稱搜尋</label>
-            <input type="text" class="form-control" name="searchName" placeholder="搜尋優惠券名稱">
-          </div>
-          <div class="my-3">
-            <label for="">折扣價格搜尋</label>
-            <div class="d-flex align-items-center">
-              <input type="text" class="form-control px-2" name="discountmin" placeholder="最小折扣">
-              <div> ~ </div>
-              <input type="text" class="form-control px-2" name="discountMax" placeholder="最大折扣">
-            </div>
-          </div>
-          <button type="submit" class="btn btn-primary">搜尋</button>
-        </form>
-      </div>
-    </div>
-    <!--  -->
-
-
-    <div class="my-2">
-      <div>
-        <a href="discountCreat.php" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
+    <div class="my-3">
+      <div class="d-flex">
+        <button class="btn btn-primary me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-magnifying-glass"></i> 搜尋</button>
+        <div>
+          <a href="discountCreat.php" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
+        </div>
       </div>
 
       <div class="d-flex justify-content-end mb-4">
