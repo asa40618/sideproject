@@ -48,7 +48,8 @@
 
       <div class="my-2">
       <label for="discountCode">折扣代碼</label>
-      <input type="text" class="form-control" name="discountCode" id="discountCode">
+      <input type="text" class="form-control my-2" name="discountCode" id="discountCode" placeholder="最多可輸入20個字元，含大寫或小寫字母">
+      <button id="randomCode" class="btn btn-primary">產生隨機代碼</button>
       </div>
 
       <div class="row my-3 align-items-center">
@@ -96,7 +97,9 @@
     </script>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
     <script>
+      // 資料input
       const discountName = document.querySelector("#discountName")
       const countType = document.querySelector("#countType")
       const discount = document.querySelector("#discount")
@@ -109,7 +112,7 @@
       
       const warningText = document.querySelector("#warningText")
 
-
+      // 指定是否可輸入最低消費金額
       flexSwitchCheckDefault.addEventListener("click",function(){
         if(minimumChange.disabled){
           minimumChange.removeAttribute("disabled")}
@@ -117,6 +120,20 @@
             minimumChange.setAttribute("disabled","disabled")
           }
       })
+
+       // 隨機產生代碼
+       const randomCode=document.querySelector("#randomCode");
+          randomCode.addEventListener("click",function(){
+          let code="";
+          for(let i=0;i<20;i++){
+          let codeSelectIndex=[ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',  'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J',  'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',  'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd',  'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n',  'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',  'y', 'z' ];
+          let randomCount=Math.floor(Math.random()*61);
+          code+=codeSelectIndex[randomCount]
+          // console.log(codeSelectIndex[randomCount]);
+          }
+          discountCode.value = code
+           })
+           
       
 
       send.addEventListener("click", function() {
@@ -128,7 +145,7 @@
         let discountCodeValue = discountCode.value
         let startDateValue = startDate.value
         let endDateValue = endDate.value
-
+    
         $.ajax({
             method: "POST", //or GET
             url: "API/discountCreatAPI.php",
@@ -161,6 +178,7 @@
 
           });
       })
+
     </script>
 
 </body>
