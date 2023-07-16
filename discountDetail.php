@@ -65,6 +65,10 @@ $row = $result->fetch_assoc();
             <th>結束日期</th>
             <td><?= $row["endDate"] ?></td>
           </tr>
+          <tr>
+            <th>啟用/停用</th>
+            <td><?php if($row["enable"]==1) {echo "啟用"; }else{echo "停用";}?></td>
+          </tr>
         </thead>
       </table>
     </div>

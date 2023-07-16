@@ -95,6 +95,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             <th class="text-center">最低消費</th>
             <th class="text-center">折扣代碼</th>
             <th class="text-center">有效期限</th>
+            <th class="text-center">啟用/停用</th>
             <th class="text-center">最後更新時間</th>
             <th></th>
           </tr>
@@ -103,15 +104,18 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
           <?php foreach ($rows as $row) : ?>
             <tr>
               <td class="text-center"><?= $row["id"] ?></td>
-              <td class="text-center"><?= $row["discountName"] ?></td>
+              <td class="text-center text-truncate" style="max-width:20px"><?= $row["discountName"] ?></td>
               <td class="text-center"><?php 
               if ($row["countType"] == 1) {
                  echo $row["discount"] . "元";
               } else {echo $row["discount"] . "%";
               } ?></td>
               <td class="text-center"><?= $row["minimum"] ?></td>
-              <td class="text-center"><?= $row["discountCode"] ?></td>
+              <td class="text-center text-truncate" style="max-width:20px"><?= $row["discountCode"] ?></td>
               <td class="text-center"><?= $row["startDate"] ?> ~ <?= $row["endDate"] ?></td>
+              <td class="text-center <?php if($row["enable"]==1) {echo "text-success"; }else{echo "text-danger";}?>">
+                  <?php if($row["enable"]==1) {echo "啟用"; }else{echo "停用";}?>
+              </td>
               <td class="text-center"><?= $row["created_at"] ?></td>
               <td class="d-flex justify-content-evenly">
                 <a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a>
