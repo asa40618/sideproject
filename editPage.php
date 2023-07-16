@@ -89,13 +89,13 @@ $row = $result->fetch_assoc();
                         <th class="align-middle">啟用/停用</th>
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="1" id="enableBtn" <?php if($row["enable"]==1){echo "checked";}?>>
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="enable" <?php if($row["enable"]==1){echo "checked";}?>>
                                 <label class="form-check-label" for="flexRadioDefault1">
                                     啟用
                                 </label>
-                                </div>
+                            </div>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="flexRadioDefault" value="0" id="disableBtn" <?php if($row["enable"]==0){echo "checked";}?>>
+                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="disable" <?php if($row["enable"]==0){echo "checked";}?>>
                                 <label class="form-check-label" for="flexRadioDefault2">
                                     停用
                                 </label>
@@ -131,11 +131,27 @@ $row = $result->fetch_assoc();
         const discountCode = document.querySelector("#discountCode")
         const startDate = document.querySelector("#startDate")
         const endDate = document.querySelector("#endDate")
-        const enable = document.querySelector("#enableBtn")
-        const disable = document.querySelector("#disableBtn")
+        const enable = document.querySelector("#enable")
+        const disable = document.querySelector("#disable")
         const send = document.querySelector("#send")
         const warningText = document.querySelector("#warningText")
 
+        let enableValue = <?=$row["enable"] ?>;
+        
+        enable.addEventListener("change",function(){
+            if(this.checked){
+                enableValue=1
+            }
+        })
+        disable.addEventListener("change",function(){
+            if(this.checked){
+                enableValue=0
+            }
+        })
+        
+        // console.log(enableValue)
+        
+                            
 
         send.addEventListener("click", function() {
             let idvalue = id.value
@@ -147,38 +163,37 @@ $row = $result->fetch_assoc();
             let startDateValue = startDate.value
             let endDateValue = endDate.value
             // console.log(idvalue)
-            console.log(disable.value)
-
+            
             
 
-            // $.ajax({
-            //         method: "POST", //or GET
-            //         url: "API/discountUpdateAPI.php",
-            //         dataType: "json",
-            //         data: {
-            //             id: idvalue,
-            //             discountName: discountNameValue,
-            //             countType: countTypeValue,
-            //             discount: discountValue,
-            //             minimum: minimumValue,
-            //             discountCode: discountCodeValue,
-            //             startDate: startDateValue,
-            //             endDate: endDateValue
-            //             enable: enableValue
-            //         }
-            //     })
-            //     .done(function(response) {
-            //         console.log(response)
-            //         let status = response.status
-            //         if (status == 0) {
-            //             warningText.innerText = response.message
-            //         } else {
-            //             // console.log("success")
-            //             // $('#myModal').modal('show');
-            //             const modal = new bootstrap.Modal(document.getElementById('myModal'));
-            //             modal.show();
-            //         }
-            //     }).fail(function(jqXHR, textStatus) {});
+            $.ajax({
+                    method: "POST", //or GET
+                    url: "API/discountUpdateAPI.php",
+                    dataType: "json",
+                    data: {
+                        id: idvalue,
+                        discountName: discountNameValue,
+                        countType: countTypeValue,
+                        discount: discountValue,
+                        minimum: minimumValue,
+                        discountCode: discountCodeValue,
+                        startDate: startDateValue,
+                        endDate: endDateValue,
+                        enable: enableValue
+                    }
+                })
+                .done(function(response) {
+                    console.log(response)
+                    let status = response.status
+                    if (status == 0) {
+                        warningText.innerText = response.message
+                    } else {
+                        // console.log("success")
+                        // $('#myModal').modal('show');
+                        const modal = new bootstrap.Modal(document.getElementById('myModal'));
+                        modal.show();
+                    }
+                }).fail(function(jqXHR, textStatus) {});
         })
     </script>
 

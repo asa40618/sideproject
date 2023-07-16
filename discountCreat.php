@@ -49,7 +49,7 @@
       <div class="my-2">
       <label for="discountCode">折扣代碼</label>
       <input type="text" class="form-control my-2" name="discountCode" id="discountCode" placeholder="最多可輸入20個字元，含數字、大寫或小寫字母">
-      <button id="randomCode" class="btn btn-primary">產生隨機代碼</button>
+      <button id="randomCode" class="btn btn-outline-primary">產生隨機代碼</button>
       </div>
 
       <div class="row my-3 align-items-center">
@@ -63,6 +63,18 @@
         </div>
       </div>
 
+      <div class="row my-3">
+        <label class="col-auto" for="">啟用/停用: </label>
+        <div class="form-check col-auto">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="enable" checked>
+          <label class="form-check-label" for="flexRadioDefault1">啟用</label>
+        </div>
+        <div class="form-check col-auto">
+          <input class="form-check-input" type="radio" name="flexRadioDefault" id="disable">
+          <label class="form-check-label" for="flexRadioDefault2">停用</label>
+        </div>
+      </div>
+
       <div class="d-flex align-items-center">
         <button type="submit" class="btn btn-primary" id="send"> <i class="fa-solid fa-plus"></i> 新增</button>
         <div class="ms-2">
@@ -72,23 +84,7 @@
       </div>
 
       <!-- 新增成功訊息 -->
-      <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h1 class="modal-title fs-5" id="exampleModalLabel">即時訊息</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              優惠券新增成功
-            </div>
-            <div class="modal-footer">
-              <a href="discountIndex.php" type="button" class="btn btn-secondary">返回列表</a>
-              <a href="discountCreat.php" type="button" class="btn btn-primary">繼續新增</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      <?php include("./modal/createSuccess.php") ?>
       <!-- 新增成功訊息 -->
     </div>
 
@@ -107,6 +103,8 @@
       const discountCode = document.querySelector("#discountCode")
       const startDate = document.querySelector("#startDate")
       const endDate = document.querySelector("#endDate")
+      const enable = document.querySelector("#enable")
+      const disable = document.querySelector("#disable")
       const flexSwitchCheckDefault = document.querySelector("#flexSwitchCheckDefault")
       const minimumChange = document.querySelector(".minimum")
       
@@ -133,8 +131,20 @@
           }
           discountCode.value = code
            })
-           
-      
+        
+        
+        let enableValue = 1;
+        enable.addEventListener("change",function(){
+            if(this.checked){
+                enableValue=1
+            }
+        })
+        disable.addEventListener("change",function(){
+            if(this.checked){
+                enableValue=0
+            }
+        })
+        
 
       send.addEventListener("click", function() {
 
@@ -161,7 +171,8 @@
               minimum:minimumValue,
               discountCode: discountCodeValue,
               startDate: startDateValue,
-              endDate: endDateValue
+              endDate: endDateValue,
+              enable: enableValue
             }
 
           })

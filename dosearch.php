@@ -70,15 +70,14 @@ $totalPageCount = ceil($numDiscount / $countPerPage);
     <!-- Bootstrap CSS v5.2.1 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 </head>
 
 <body>
 
-    <!-- modal -->
-    <?php include("./modal/deleteMessage.php") ?><!-- 刪除訊息 -->
+    <!-- modal --> 
+    
     <?php include("./modal/searchbar.php") ?><!-- 搜尋 -->
     <!-- modal -->
 
@@ -133,6 +132,7 @@ $totalPageCount = ceil($numDiscount / $countPerPage);
                         <th class="text-center">折扣內容</th>
                         <th class="text-center">折扣代碼</th>
                         <th class="text-center">有效期限</th>
+                        <th class="text-center">啟用/停用</th>
                         <th class="text-center">最後更新時間</th>
                         <th></th>
                     </tr>
@@ -150,12 +150,20 @@ $totalPageCount = ceil($numDiscount / $countPerPage);
                                                     ?></td>
                             <td class="text-center"><?= $row["discountCode"] ?></td>
                             <td class="text-center"><?= $row["startDate"] ?> ~ <?= $row["endDate"] ?></td>
+                            <td class="text-center <?php if($row["enable"]==1) {echo "text-success"; }else{echo "text-danger";}?>">
+                             <?php if($row["enable"]==1) {echo "啟用"; }else{echo "停用";}?>
+                            </td>
                             <td class="text-center"><?= $row["created_at"] ?></td>
                             <td class="d-flex justify-content-evenly">
                                 <a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a>
                                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">刪除 <i class="fa-solid fa-trash-can"></i> </button>
                             </td>
                         </tr>
+
+                        <!-- 以下刪除提示 -->
+                            <?php include("./modal/deleteMessage.php") ?>
+                        <!-- 以上刪除提示 -->
+
                     <?php endforeach ?>
                 </tbody>
             </table>

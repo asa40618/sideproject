@@ -5,8 +5,6 @@ require_once("./mydb-connect.php");
 
 $id=$_GET["id"];
 
-echo($id);
-
 $sql="UPDATE ch SET valid=0 WHERE id=$id";
 
 if ($conn->query($sql) === TRUE) {

@@ -19,6 +19,7 @@ $minimum = $_POST["minimum"];
 $discountCode = $_POST["discountCode"];
 $startDate = $_POST["startDate"];
 $endDate = $_POST["endDate"];
+$enable =$_POST["enable"];
 
 if (empty($_POST["discountName"])) {
     $data = [
@@ -95,7 +96,7 @@ $now = date('Y-m-d H:i:s');
 // var_dump($discountname,$countType,$discount,$discountCode,$startDate,$endDate,$now);
 
 
-$sql = "INSERT INTO ch (discountName,counTtype,discount,minimum,discountCode,startDate,endDate,created_at,valid) VALUES ('$discountName','$countType','$discount','$minimum','$discountCode','$startDate','$endDate','$now','1')";
+$sql = "INSERT INTO ch (discountName,counTtype,discount,minimum,discountCode,startDate,endDate,enable,created_at,valid) VALUES ('$discountName','$countType','$discount','$minimum','$discountCode','$startDate','$endDate','$enable','$now','1')";
 
 
 
