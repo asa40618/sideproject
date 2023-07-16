@@ -48,7 +48,7 @@
 
       <div class="my-2">
       <label for="discountCode">折扣代碼</label>
-      <input type="text" class="form-control my-2" name="discountCode" id="discountCode" placeholder="最多可輸入20個字元，含大寫或小寫字母">
+      <input type="text" class="form-control my-2" name="discountCode" id="discountCode" placeholder="最多可輸入20個字元，含數字、大寫或小寫字母">
       <button id="randomCode" class="btn btn-primary">產生隨機代碼</button>
       </div>
 
@@ -145,6 +145,10 @@
         let discountCodeValue = discountCode.value
         let startDateValue = startDate.value
         let endDateValue = endDate.value
+
+        if(minimumChange.disabled){//如果最低消費金額
+          minimumValue=0;
+        }
     
         $.ajax({
             method: "POST", //or GET
