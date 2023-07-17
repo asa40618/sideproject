@@ -10,8 +10,8 @@
                     優惠券更新成功
                 </div>
                 <div class="modal-footer">
-                    <a href="discountIndex.php" type="button" class="btn btn-secondary">返回列表</a>
-                    <a href="editPage.php?id=<?= $row["id"] ?>" type="button" class="btn btn-primary">繼續更新</a>
+                    <a href="discountIndex_Ch.php" type="button" class="btn btn-secondary">返回列表</a>
+                    <a href="editPage_Ch.php?id=<?= $row["id"] ?>" type="button" class="btn btn-primary">繼續更新</a>
                 </div>
             </div>
         </div>

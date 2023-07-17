@@ -13,7 +13,7 @@ $numDiscount = $resultPage->num_rows;
 $totalPageCount = ceil($numDiscount / $countPerPage);
 
 //升冪降冪控制
-include("./modal/sortType.php");
+include("./modal/sortType_Ch.php");
 
 
 $sql = "SELECT * FROM ch WHERE valid=1 ORDER BY $where LIMIT $start,$countPerPage ";
@@ -37,20 +37,20 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 
 <body>
   <!-- modal -->
-  <?php include("./modal/searchbar.php") ?><!-- 搜尋 -->
+  <?php include("./modal/searchbar_Ch.php") ?><!-- 搜尋 -->
   <!-- modal -->
 
   <div class="container">
 
     <div class="mt-2">
-      <a href="./discountIndex.php" class="h2 text-decoration-none">優惠券目錄</a>
+      <a href="./discountIndex_Ch.php" class="h2 text-decoration-none">優惠券目錄</a>
     </div>
 
     <div class="my-3">
       <div class="d-flex">
         <button class="btn btn-primary me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-magnifying-glass"></i> 搜尋</button>
         <div>
-          <a href="discountCreat.php" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
+          <a href="discountCreat_Ch.php" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
         </div>
       </div>
 
@@ -60,11 +60,11 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             單頁筆數
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="discountIndex.php?countPerPage=10">10</a></li>
-            <li><a class="dropdown-item" href="discountIndex.php?countPerPage=20">20</a></li>
-            <li><a class="dropdown-item" href="discountIndex.php?countPerPage=30">30</a></li>
-            <li><a class="dropdown-item" href="discountIndex.php?countPerPage=40">40</a></li>
-            <li><a class="dropdown-item" href="discountIndex.php?countPerPage=50">50</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?countPerPage=10">10</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?countPerPage=20">20</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?countPerPage=30">30</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?countPerPage=40">40</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?countPerPage=50">50</a></li>
           </ul>
         </div>
         <div class="btn-group float-end">
@@ -72,12 +72,12 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
             排序條件
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="discountIndex.php?type=1">id升冪</a></li>
-            <li><a class="dropdown-item" href="discountIndex.php?type=2">id降冪</a></li>
-            <li><a class="dropdown-item" href="discountIndex.php?type=3">折扣升冪</a></li>
-            <li><a class="dropdown-item" href="discountIndex.php?type=4">折扣降冪</a></li>
-            <li><a class="dropdown-item" href="discountIndex.php?type=5">有效日期升冪</a></li>
-            <li><a class="dropdown-item" href="discountIndex.php?type=6">有效日期降冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?type=1">id升冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?type=2">id降冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?type=3">折扣升冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?type=4">折扣降冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?type=5">有效日期升冪</a></li>
+            <li><a class="dropdown-item" href="discountIndex_Ch.php?type=6">有效日期降冪</a></li>
           </ul>
         </div>
       </div>
@@ -116,13 +116,13 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
               </td>
               <td class="text-center"><?= $row["created_at"] ?></td>
               <td class="d-flex justify-content-evenly">
-                <a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a>
+                <a href="discountDetail_Ch.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a>
                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $row["id"] ?>">刪除 <i class="fa-solid fa-trash-can"></i> </button>
               </td>
             </tr>
 
              <!-- 以下刪除提示 -->
-                <?php include("./modal/deleteMessage.php") ?>
+               <?php include("./modal/deleteMessage_Ch.php"); ?>
               <!-- 以上刪除提示 -->
 
           <?php endforeach ?>
@@ -134,17 +134,17 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
       <ul class="pagination">
         <li class="page-item <?php if (!isset($_GET["page"]) || $_GET["page"] == 1) {
                                 echo "disabled";} ?>">
-          <a class="page-link " href="discountIndex.php?page=<?= $page - 1 ?>&<?php if (isset($type)) {
+          <a class="page-link " href="discountIndex_Ch.php?page=<?= $page - 1 ?>&<?php if (isset($type)) {
                                                                                 echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
         <?php for ($i = 1; $i <= $totalPageCount; $i++) : ?>
-          <li class="page-item <?php if ($page == $i) { echo "active";} ?>"><a class="page-link" href="discountIndex.php?page=<?= $i ?> &<?php if (isset($type)) { echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>"><?= $i ?></a>
+          <li class="page-item <?php if ($page == $i) { echo "active";} ?>"><a class="page-link" href="discountIndex_Ch.php?page=<?= $i ?> &<?php if (isset($type)) { echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>"><?= $i ?></a>
           </li>
         <?php endfor; ?>
         <li class="page-item <?php if (isset($_GET["page"]) && $_GET["page"] == $totalPageCount) {echo "disabled";} ?> ">
-          <a class="page-link" href="discountIndex.php?page=<?= $page + 1 ?>&<?php if (isset($type)) { echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>" aria-label="Next">
+          <a class="page-link" href="discountIndex_Ch.php?page=<?= $page + 1 ?>&<?php if (isset($type)) { echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>" aria-label="Next">
             <span aria-hidden="true">&raquo;</span>
           </a>
         </li>
@@ -162,6 +162,7 @@ $rows = $result->fetch_all(MYSQLI_ASSOC);
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 
 </body>
 

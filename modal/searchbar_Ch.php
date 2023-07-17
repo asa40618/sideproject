@@ -5,7 +5,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-        <form action="dosearch.php">
+        <form action="dosearch_Ch.php">
             <div class="my-3">
                 <label for="">名稱搜尋</label>
                 <input type="text" class="form-control" name="searchName" placeholder="搜尋優惠券名稱">

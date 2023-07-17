@@ -1,12 +1,12 @@
 <?php
 require_once("mydb-connect.php");
 if (!isset($_GET["searchName"])) {
-    header("location:404page.php");
+    header("location:404page_Ch.php");
     exit;
 }
 
 //升降冪排序 
-include("./modal/sortType.php");
+include("./modal/sortType_Ch.php");
 
 // 金額篩選
 $discountmin = $_GET["discountmin"];
@@ -78,21 +78,21 @@ $totalPageCount = ceil($numDiscount / $countPerPage);
 
     <!-- modal --> 
     
-    <?php include("./modal/searchbar.php") ?><!-- 搜尋 -->
+    <?php include("./modal/searchbar_Ch.php") ?><!-- 搜尋 -->
     <!-- modal -->
 
     <div class="container">
         <div class="mt-2">
-            <a href="./discountIndex.php" class="h2 text-decoration-none">優惠券目錄</a>
+            <a href="./discountIndex_Ch.php" class="h2 text-decoration-none">優惠券目錄</a>
         </div>
 
         <div class="my-3">
             <div class="d-flex">
                 <button class="btn btn-primary me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><i class="fa-solid fa-magnifying-glass"></i> 搜尋</button>
                 <div>
-                    <a href="discountCreat.php" class="btn btn-primary me-2"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
+                    <a href="discountCreat_Ch.php" class="btn btn-primary me-2"><i class="fa-solid fa-file-circle-plus"></i> 新增</a>
                 </div>
-                <a href="discountIndex.php" class="btn btn-primary col-auto"><i class="fa-solid fa-reply"></i> 返回列表</a>
+                <a href="discountIndex_Ch.php" class="btn btn-primary col-auto"><i class="fa-solid fa-reply"></i> 返回列表</a>
             </div>
             <div class="d-flex justify-content-end mb-4">
              <div class="btn-group me-2">
@@ -100,11 +100,11 @@ $totalPageCount = ceil($numDiscount / $countPerPage);
                         單頁筆數
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&countPerPage=10">10</a></li>
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&countPerPage=20">20</a></li>
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&countPerPage=30">30</a></li>
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&countPerPage=40">40</a></li>
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&countPerPage=50">50</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&countPerPage=10">10</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&countPerPage=20">20</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&countPerPage=30">30</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&countPerPage=40">40</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&countPerPage=50">50</a></li>
                     </ul>
                 </div>
                 <div class="btn-group">
@@ -112,12 +112,12 @@ $totalPageCount = ceil($numDiscount / $countPerPage);
                         排序條件
                     </button>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=1">id升冪</a></li>
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=2">id降冪</a></li>
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=3">折扣升冪</a></li>
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=4">折扣降冪</a></li>
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=5">有效日期升冪</a></li>
-                        <li><a class="dropdown-item" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=6">有效日期降冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=1">id升冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=2">id降冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=3">折扣升冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=4">折扣降冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=5">有效日期升冪</a></li>
+                        <li><a class="dropdown-item" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&type=6">有效日期降冪</a></li>
                     </ul>
                 </div>
             </div>
@@ -155,13 +155,13 @@ $totalPageCount = ceil($numDiscount / $countPerPage);
                             </td>
                             <td class="text-center"><?= $row["created_at"] ?></td>
                             <td class="d-flex justify-content-evenly">
-                                <a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a>
-                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">刪除 <i class="fa-solid fa-trash-can"></i> </button>
+                                <a href="discountDetail_Ch.php?id=<?= $row["id"] ?>" class="btn btn-primary">查看 <i class="fa-solid fa-right-to-bracket"></i> </a>
+                                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal<?=$row["id"] ?>">刪除 <i class="fa-solid fa-trash-can"></i> </button>
                             </td>
                         </tr>
 
                         <!-- 以下刪除提示 -->
-                            <?php include("./modal/deleteMessage.php") ?>
+                            <?php include("./modal/deleteMessage_Ch.php") ?>
                         <!-- 以上刪除提示 -->
 
                     <?php endforeach ?>
@@ -172,17 +172,17 @@ $totalPageCount = ceil($numDiscount / $countPerPage);
         <nav aria-label="Page navigation example">
             <ul class="pagination">
                 <li class="page-item">
-                    <a class="page-link <?php if ($page - 1 == 0) {echo "disabled";} ?>" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) { echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&page=<?= $page - 1 ?>" aria-label="Previous">
+                    <a class="page-link <?php if ($page - 1 == 0) {echo "disabled";} ?>" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) { echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&page=<?= $page - 1 ?>" aria-label="Previous">
                         <span aria-hidden="true">&laquo;</span>
                     </a>
                 </li>
 
                 <?php for ($i = 1; $i <= $totalPageCount; $i++) : ?>
-                    <li class="page-item"><a class="page-link <?php if ($i == $page) {echo "active";} ?>" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&page=<?= $i ?>"><?= $i ?></a></li>
+                    <li class="page-item"><a class="page-link <?php if ($i == $page) {echo "active";} ?>" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&page=<?= $i ?>"><?= $i ?></a></li>
                 <?php endfor  ?>
 
                 <li class="page-item">
-                    <a class="page-link <?php if ($page == $totalPageCount) {echo "disabled";} ?>" href="dosearch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&page=<?= $page + 1 ?>" aria-label="Next">
+                    <a class="page-link <?php if ($page == $totalPageCount) {echo "disabled";} ?>" href="dosearch_Ch.php?searchName=<?= $searchName ?>&discountmin=<?= $discountmin ?>&discountMax=<?= $discountMax ?>&datemin=<?= $datemin ?>&dateMax=<?= $dateMax ?>&countType=<?= $countType ?>&<?php if (isset($type)) {echo "type=$type";} ?>&<?php if(isset($countPerPage)){ echo "countPerPage=$countPerPage";} ?>&page=<?= $page + 1 ?>" aria-label="Next">
                         <span aria-hidden="true">&raquo;</span>
                     </a>
                 </li>

@@ -2,7 +2,7 @@
 
 require_once("./mydb-connect.php");
 if (!isset($_GET["id"])) {
-    header("location:404page.php");
+    header("location:404page_Ch.php");
     die;
 }
 
@@ -32,7 +32,7 @@ $row = $result->fetch_assoc();
 
 <body>
 
-    <?php include("./modal/updateSuccess.php") ?>
+    <?php include("./modal/updateSuccess_Ch.php") ?>
 
     <div class="container">
         <h2 class="my-2">優惠券編輯</h2>
@@ -108,7 +108,7 @@ $row = $result->fetch_assoc();
         </div>
         <div class="d-flex align-items-center">
             <button class="btn btn-primary me-2" id="send"> <i class="fa-regular fa-square-check"></i> 編輯完成</button>
-            <a href="discountDetail.php?id=<?= $row["id"] ?>" class="btn btn-primary me-2"> <i class="fa-solid fa-reply"></i> 返回</a>
+            <a href="discountDetail_Ch.php?id=<?= $row["id"] ?>" class="btn btn-primary me-2"> <i class="fa-solid fa-reply"></i> 返回</a>
             <div class="text-danger" id="warningText"></div>
         </div>
 
@@ -168,7 +168,7 @@ $row = $result->fetch_assoc();
 
             $.ajax({
                     method: "POST", //or GET
-                    url: "API/discountUpdateAPI.php",
+                    url: "API/discountUpdateAPI_Ch.php",
                     dataType: "json",
                     data: {
                         id: idvalue,

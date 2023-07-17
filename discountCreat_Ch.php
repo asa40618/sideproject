@@ -78,13 +78,13 @@
       <div class="d-flex align-items-center">
         <button type="submit" class="btn btn-primary" id="send"> <i class="fa-solid fa-plus"></i> 新增</button>
         <div class="ms-2">
-          <a href="discountIndex.php" class="btn btn-primary"> <i class="fa-solid fa-reply"></i> 返回列表</a>
+          <a href="discountIndex_Ch.php" class="btn btn-primary"> <i class="fa-solid fa-reply"></i> 返回列表</a>
         </div>
         <div class="ms-2"><span class="text-danger" id="warningText"></span></div>
       </div>
 
       <!-- 新增成功訊息 -->
-      <?php include("./modal/createSuccess.php") ?>
+      <?php include("./modal/createSuccess_Ch.php") ?>
       <!-- 新增成功訊息 -->
     </div>
 
@@ -162,7 +162,7 @@
     
         $.ajax({
             method: "POST", //or GET
-            url: "API/discountCreatAPI.php",
+            url: "API/discountCreatAPI_Ch.php",
             dataType: "json",
             data: {
               discountName: discountNameValue,

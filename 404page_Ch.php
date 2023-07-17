@@ -22,7 +22,7 @@
   <div class="container">
     <div class="my-3 position">
         <video muted autoplay loop>
-        <source src="gatsby.1497548146.mp4" type="video/mp4">
+        <source src="gatsby.1497548146_Ch.mp4" type="video/mp4">
         </video>
     </div>
     <div>   

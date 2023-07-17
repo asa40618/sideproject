@@ -3,7 +3,7 @@
 require_once("./mydb-connect.php");
 
 if(!isset($_GET["id"])){
-  header("location:404page.php");
+  header("location:404page_Ch.php");
 }
 
 $id = $_GET["id"];
@@ -72,8 +72,8 @@ $row = $result->fetch_assoc();
         </thead>
       </table>
     </div>
-    <a href="editPage.php?id=<?= $id ?>" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> 編輯</a>
-    <a href="discountIndex.php" class="btn btn-primary"> <i class="fa-solid fa-reply"></i> 返回列表 </a>
+    <a href="editPage_Ch.php?id=<?= $id ?>" class="btn btn-primary"> <i class="fa-solid fa-pen-to-square"></i> 編輯</a>
+    <a href="discountIndex_Ch.php" class="btn btn-primary"> <i class="fa-solid fa-reply"></i> 返回列表 </a>
   </div>
   <!-- Bootstrap JavaScript Libraries -->
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
